@@ -16,3 +16,16 @@ print(lists[1:3])  # 从第二个开始输出到第三个元素
 print(lists[2:])  # 输出从第三个元素开始的所有元素
 print(tinyList * 2)  # * 输出两次列表
 print(lists + tinyList)  # + 连接列表
+
+
+# list 遍历
+
+sites = ["Baidu", "Google", "Runoob", "Taobao"]
+for site in sites:
+    if site == "Runoob":
+        print("菜鸟教程!")
+        break
+    print("循环数据 " + site)
+else:
+    print("没有循环数据!")
+print("完成循环!")
