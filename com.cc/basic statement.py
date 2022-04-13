@@ -89,3 +89,8 @@ for i in range(1, n):
         continue
     if i == n - 1:
         break
+
+chinese_zodiac = '猴鸡狗猪鼠牛虎兔龙蛇马羊'
+for year in range(2000, 2019):
+    print('%s 年的生肖是 %s' % (year, chinese_zodiac[year % 12]))
+    #  %s 替换输出的字符串  %( 变量输入进来)

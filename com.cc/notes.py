@@ -1,5 +1,6 @@
 # random 模块中的 randint（）函数 它用于在指定的范围内随即返回一个数字 函数的原型是random.randint(a,b)
 # input 输入的是一个字符串
+# def 全名define 定义函数的意思
 # python中的转义符
 """
 '\'  为续行符

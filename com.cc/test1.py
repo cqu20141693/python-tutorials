@@ -1,7 +1,2 @@
-import random
-names = [input('请输入11个人的姓名：')]
-names = str(names)
-names = names.rstrip("'")
-names = names.lstrip("'")
-print(names)
-print(len(names))
+x1 = [x**2 for x in range(1,11) if x%2==0]
+print(x1)
