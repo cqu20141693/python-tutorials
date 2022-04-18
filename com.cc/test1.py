@@ -1,2 +1,3 @@
-x1 = [x**2 for x in range(1,11) if x%2==0]
-print(x1)
+chinese_zodiac = '猴鸡狗猪鼠牛虎兔龙蛇马羊'
+cz_num = {i: 0 for i in chinese_zodiac}
+print(cz_num)

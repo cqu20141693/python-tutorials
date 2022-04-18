@@ -8,9 +8,9 @@ write () 输出
 close ()  关闭文件
 """
 # 将小说的主要人物记录文件中
-file1 = open('name.txt', 'w')
-file1.write('qweeqw')
-file1.close()
+file1 = open('name.txt', 'w')  # 创建打开这个文件
+file1.write('qweeqw')  # 在这个文件中写入
+file1.close()  # 关闭文件报春文件
 #  写入一个文件流程 open--write--close    读出一个文件 write（read）
 file2 = open('name.txt')
 print(file2.read())
