@@ -29,7 +29,17 @@ print(a & b)  # a 和 b 的交集
 
 print(a ^ b)  # a 和 b 中不同时存在的元素
 
-
 # 遍历集合
 for e in a:
     print(e)
+
+'''
+集合推导式基本格式：{}
+{ expression for item in Sequence }
+或
+{ expression for item in Sequence if conditional }
+'''
+print("set: func for item in sequ if condition")
+
+sets = {i % 6 for i in range(10) if i < 8}
+print(sets)

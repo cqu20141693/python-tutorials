@@ -1,4 +1,5 @@
-# 元组（tuple）与列表类似，不同之处在于元组的元素不能修改。元组写在小括号 () 里，元素之间用逗号隔开
+# 元组（tuple）与列表类似，不同之处在于元组的元素不能修改。
+# 元组写在小括号 () 里，元素之间用逗号隔开
 
 tuple1 = ('abcd', 786, 2.23, 'runoob', 70.2)
 # 最小二元组
@@ -20,3 +21,15 @@ print(tup2)
 # 遍历Tuple
 for t in tinyTuple:
     print(t)
+
+'''
+元组推导式基本格式：()
+(expression for item in Sequence )
+或
+(expression for item in Sequence if conditional )
+'''
+print("tuple: func for item in Sequence")
+tuples = (item % 5 for item in range(10) if item % 2 == 0)
+# 元组推导式返回的结果是一个生成器对象。
+print(tuples)
+print(tuple(tuples))
