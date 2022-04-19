@@ -9,6 +9,7 @@ Python 中单引号 ' 和双引号 " 使用完全相同。
 Python 中的字符串有两种索引方式，从左往右以 0 开始，从右往左以 -1 开始。
 Python 中的字符串不能改变。
 Python 没有单独的字符类型，一个字符就是长度为 1 的字符串。
+Python 访问子字符串，可以使用方括号 [] 来截取字符串
 字符串的截取的语法格式如下：变量[头下标:尾下标:步长]
 """
 strs = '123456789'
@@ -61,3 +62,91 @@ if __name__ == "__main__":
     inputs = 'I like runoob'
     rw = reverseWords(inputs)
     print(rw)
+
+'''
+字符串运算符
++	字符串连接	a + b 输出结果： HelloPython
+*	重复输出字符串	a*2 输出结果：HelloHello
+[]	通过索引获取字符串中字符	a[1] 输出结果 e
+[ : ]	截取字符串中的一部分，遵循左闭右开原则，str[0:2] 是不包含第 3 个字符的。	a[1:4] 输出结果 ell
+in	成员运算符 - 如果字符串中包含给定的字符返回 True	'H' in a 输出结果 True
+not in	成员运算符 - 如果字符串中不包含给定的字符返回 True	'M' not in a 输出结果 True
+r/R	原始字符串 - 原始字符串：所有的字符串都是直接按照字面的意思来使用，没有转义特殊或不能打印的字符。 原始字符串除在字符串的第一个引号前加上字母 r（可以大小写）以外，与普通字符串有着几乎完全相同的语法。	
+print( r'\n' )
+print( R'\n' )
+%	格式字符串	请看下一节内容。
+'''
+
+
+def test_string_operator():
+    a = "Hello"
+    b = "Python"
+
+    print("a + b 输出结果：", a + b)
+    print("a * 2 输出结果：", a * 2)
+    print("a[1] 输出结果：", a[1])
+    print("a[1:4] 输出结果：", a[1:4])
+
+    if "H" in a:
+        print("H 在变量 a 中")
+    else:
+        print("H 不在变量 a 中")
+
+    if "M" not in a:
+        print("M 不在变量 a 中")
+    else:
+        print("M 在变量 a 中")
+
+    print(r'\n 不进行字符串转义输出')
+    print(R'\n 不进行字符串转义输出')
+    print('进行字符串转义输出\n')
+
+    print("我叫 %s 今年 %d 岁!" % ('小明', 10))
+
+
+print("测试字符串运算符：")
+test_string_operator()
+
+'''
+f-string 格式化字符串以 f 开头，后面跟着字符串，字符串中的表达式用大括号 {} 包起来，它会将变量或表达式计算后的值替换进去,
+用了这种方式明显更简单了，不用再去判断使用 %s，还是 %d
+在 Python 3.8 的版本中可以使用 = 符号来拼接运算表达式与结果
+'''
+
+
+def test_string_format():
+    name = "邬江涛"
+    age = 27
+    print("%s 的年龄是 %d" % (name, age))
+
+    print(f'你好 {name}')
+    print(f'你的年龄是 {age=}')
+
+
+print("字符串格式化：")
+test_string_format()
+
+'''
+字符串内建函数：
+str包提供了字符串的常见功能方法函数，可以直接使用处理字符串
+'''
+
+
+def test_str_build_in_func():
+    strs = "www.runoob.com"
+    sub = 'o'
+    print("strs.count('o') : ", strs.count(sub))
+    print("strs.count('o',0,8) : ", strs.count(sub, 0, 8))
+
+    print('strs.find', strs.find(sub))
+    print('strs.find', strs.find('run', 0, 8))
+
+    print('strs.index', strs.index('run', 0, 8))
+    try:
+        print('strs.index', strs.index('runs', 0, 8))
+    except ValueError as err:
+        print(f"strs.index {err}")
+
+
+print("测试字符串的内建函数")
+test_str_build_in_func()

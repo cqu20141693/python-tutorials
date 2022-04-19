@@ -39,3 +39,18 @@ print("True ==1", True == 1)
 print("false ==0", False == 0)
 print("false+1=", False + 1)
 print("tue+1=", True + 1)
+
+'''
+Math :
+'''
+import math
+import random
+
+print("test math,random")
+print(math.cos(0.5) ** 2 + math.sin(0.5) ** 2)
+print(math.fabs(-5.0))
+print(math.pi)
+print(math.e)
+
+print(random.random())
+print(random.uniform(1, 10))
