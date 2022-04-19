@@ -27,3 +27,17 @@ for k in tinyDict.keys():
     print("{}:{}".format(k, tinyDict[k]))
 for k, v in tinyDict.items():
     print("{}:{}".format(k, v))
+'''
+字典推导基本格式：
+{ key_expr: value_expr for value in collection }
+或
+{ key_expr: value_expr for value in collection if condition }
+'''
+print("dict: {key_expr:value_expr for key in collection if coniditon}")
+listdemo = ['Google', 'Runoob', 'Taobao']
+# 将列表中各字符串值为键，各字符串的长度为值，组成键值对
+newdict = {key: len(key) for key in listdemo}
+print(newdict)
+
+dicts = {i: i * 10 for i in range(10) if i % 2 == 0}
+print(dicts)

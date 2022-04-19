@@ -17,7 +17,6 @@ print(lists[2:])  # 输出从第三个元素开始的所有元素
 print(tinyList * 2)  # * 输出两次列表
 print(lists + tinyList)  # + 连接列表
 
-
 # list 遍历
 
 sites = ["Baidu", "Google", "Runoob", "Taobao"]
@@ -29,3 +28,21 @@ for site in sites:
 else:
     print("没有循环数据!")
 print("完成循环!")
+
+'''
+列表推导式格式为：[]
+[表达式 for 变量 in 列表] 
+[out_exp_res for out_exp in input_list]
+
+或者 
+
+[表达式 for 变量 in 列表 if 条件]
+[out_exp_res for out_exp in input_list if condition]
+'''
+print("list:[express for var in list if 条件]")
+multiples = [i for i in range(30) if i % 3 == 0]
+print(multiples)
+
+names = ["qq", "wechat", 123]
+lists = [i for i in names if isinstance(i, str)]
+print(lists)
