@@ -49,7 +49,7 @@ print(str(s))  # 将序列转化为字符串
 print(sorted(s))  # 将序列进行排序 一般是从小到大
 print(enumerate(s))  # 将序列组合成为一个索引序列 多用在for循环中
 
-#         列表
+#                  列表
 # 列表（list） 列表可以储存任何类型的数据 ， 同一个列表中的数据类型可以不同
 # 列表也是序列结构  可以进行序列的基本操作 索引，切片，加，乘，检查成员
 # 创建  相邻之间的元素用逗号隔开
@@ -58,15 +58,49 @@ q = [1024, 2.5, 'python']
 # 对列表进行操作  对象名.(这里的.相当于访问符)方法（）
 q[1] = 1025  # 修改列表中的第二个元素
 print(q)
+
+#  append 和 extend() 的不同之处在于:extend()不会把列表或者元祖视为一个整体，而是把他们的元素逐个增添带列表中
+list2 = [1, 8, 9, 'tr']
+t = (7, 8, 6, 's')
+list2.append(t)
+print(list2)
+list2.extend(t)
+print(list2)
+
 q.append('hello')  # 向列表中增添新的元素 且只有一个且在末尾
 print(q)
+
 q.insert(1, 'wuxin')  # 表示在指定的位置增添对象  索引，元素
 print(q)
-del q[2]  # 删除指定索引列表中的元素
+
+# del 关键字的语法格式  del listname  后者表示删除列表的名字
+del q[2]  # 删除指定索引列表中的元素  还可以指定删除连续的元素 del [1:4]
 print(q)
-print(q.pop(1))  # 指定下标删除的元素，并且返回删除的下标值
+
+print(q.pop(1))  # 指定下标删除的元素，并且返回删除的下标值   如果没有指定值 就会默认删除最后一个元素
+
+#   列表的修改  1.重新赋值
+nums = [12, 34, 6, 4, 568, 664, 633, 456]
+nums[1:4] = ['s', 'r', 'w']  # 修改1-4的元素 不包括第四个元素
+print('nums=', nums)
+
+# 如果对空切片赋值  相当于插入一组新的元素  但是不支持单个值
+nums[4:4] = ['python', 'hello']
+print(nums)
+nums[1:6:2] = [999,888,777] # 修改1，3,5的元素
+print(nums)
+
+#  如果使用字符串赋值  Python会自动大字符串转化为序列
+o1 = list("hello world")
+o1[2:4] = "xyz"
+print('o1=', o1)
+
 #  count 用来统计一个列表中元素出现的次数
+#  语法格式:  listname.count(obj)
 #  index  用来查找摸个元素在列表做那个首次出现的位置（索引）
+#  语法格式 :  listname.index(obj,star,end)
+
+
 q.remove(1024)
 print(q)
 #  remove 移除列表中某个值的首次匹配项
