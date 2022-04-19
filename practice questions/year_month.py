@@ -9,7 +9,7 @@ if 0 < month <= 12:
 else:
     pass
 tep += day
-if (year%400==0) or ((year%4 == 0) and (year%100!=0)):
-    if month>2:
-        tep +=1
-print('%s 年的第 %d 天'%(year,tep))
+if (year % 400 == 0) or ((year % 4 == 0) and (year % 100 != 0)):
+    if month > 2:
+        tep += 1
+print('%s 年的第 %d 天' % (year, tep))
