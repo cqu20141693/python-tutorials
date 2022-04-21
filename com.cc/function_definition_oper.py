@@ -28,13 +28,6 @@ def my_s13():
     pass
 
 
-# 当我们不确定参数的个数时，可以使用不定长参数，在参数名前加 * 进行声明，格式如下所示：
-"""
-def 函数名(*参数名):
-	函数体
-"""
-
-
 #  列子 自定义len（）函数
 def my_len(str):
     length = 0
@@ -142,3 +135,201 @@ dis_str1("http://c.biancheng.net/java/", "http://c.biancheng.net/golang/")
 #  Python中有些内置函数或者第三方函数有默认值，可以使用“函数名.__defaults__”查看函数的默认值参数的当前值，
 #  其返回值是一个元组。以本节中的 dis_str1() 函数为例，在其基础上，执行如下代码：
 print(dis_str1.__defaults__)
+
+#    Python函数的不定长参数
+# 当我们不确定参数的个数时，可以使用不定长参数，在参数名前加 * 进行声明，格式如下所示：
+"""
+def 函数名(*参数名):
+	函数体
+"""
+
+lisr1 = []
+
+
+def s13(*b):  # 可变长参数  *b 是一个元组  **b是一个字典
+    for i in b:
+        lisr1.append(i)
+    lisr1.sort()
+    print(lisr1)
+
+
+s13(4, 5, 45, 5, 6, 4, 564)
+
+
+def person(name, age, *, city, job):  # 命名关键字参数需要一个特殊分隔符*，*后面的参数被视为命名关键字参数。
+    print(name, age, city, job)
+
+
+person('wuxin', 20, city='chongqi', job='xuesheng')  # city和job都是关键字参数不给出关键字会报错
+
+
+#  函数允许计算两个数的乘积，请稍加改造，变成可接收一个或多个数并计算乘积：
+
+def chengfa(a, b, *t):
+    if t == ():
+        c1 = a * b
+        return c1
+    else:
+        for i in t:
+            c2 = a * b * i
+        return c2
+
+
+#  测试
+print(chengfa(5, 6, 2, 5, 10))
+
+#          Python中None（空值）及用法
+
+# 在Python中有一个特殊的常量None N必须大写 和False不同 他不表示0也不表示空字符串 表示没有值 也就是空值
+
+# 这里的空值不代表空对象，及None和[]，“” 不同
+print(None is [])
+print(None == "")
+# None 有自己的数据类型
+print(type(None))
+
+
+# 如果希望变量中存储的东西不与任何其它值混淆，就可以使用 None。
+
+
+#            递归函数  在函数内部，可以调用其他函数。如果一个函数在内部调用自身本身，这个函数就是递归函数。
+
+def fact(n):
+    if n == 1:
+        return 1
+    return fact(n - 1) * n
+
+
+print(fact(5))
+"""
+===> fact(5)
+===> 5 * fact(4)
+===> 5 * (4 * fact(3))
+===> 5 * (4 * (3 * fact(2)))
+===> 5 * (4 * (3 * (2 * fact(1))))
+===> 5 * (4 * (3 * (2 * 1)))
+===> 5 * (4 * (3 * 2))
+===> 5 * (4 * 6)
+===> 5 * 24
+===> 120
+"""
+
+
+#  变量作用域（全局变量和局部变量）
+
+# 局部变量（Local Variable） 他的作用只限制于函数内部，除了函数就不能使用了
+
+def demo(name, add):
+    print("函数内部 name =", name)
+    print("函数内部 add =", add)
+
+
+demo("Python教程", "http://c.biancheng.net/python/")
+#   就就会报错  print("函数外部 name =", name)
+#   就会报错   print("函数外部 add =", add)
+
+
+# 全局变量 除了在函数内部定义变量，Python 还允许在所有函数的外部定义变量，这样的变量称为全局变量（Global Variable）。
+
+add = "http://c.biancheng.net/shell/"
+
+
+def text():
+    print("函数体内访问：", add)
+
+
+text()
+print('函数体外访问：', add)
+
+
+#    global关键字  可对变量进行修饰  修饰后变量变为全局变量
+
+def text():
+    global add
+    add = "http://c.biancheng.net/java/"
+    print("函数体内访问：", add)
+
+
+text()
+print('函数体外访问：', add)
+
+#         globals() 函数
+#  globals() 函数为 Python 的内置函数，它可以返回一个包含全局范围内所有变量的字典，该字典中的每个键值对，键为变量名，值为该变量的值。
+
+# 全局变量
+Pyname = "Python教程"
+Pyadd = "http://c.biancheng.net/python/"
+
+
+def text():
+    # 局部变量
+    Shename = "shell教程"
+    Sheadd = "http://c.biancheng.net/shell/"
+
+
+print(globals())  # 可以返回所有全局变量的字典  键 为变量名 值为变量的值
+
+print(globals()['Pyname'])  # 输出 全局变量中 Python 键的值
+globals()['Pyname'] = 'Python入门教程'  # 修改全局变量中 Python键的值
+print(Pyname)
+
+#     A
+#     locals() 函数也是 Python 内置函数之一，通过调用该函数，我们可以得到一个包含当前作用域内所有变量的字典。
+#     这里所谓的“当前作用域”指的是，在函数内部调用 locals() 函数，会获得包含所有局部变量的字典；
+#     而在全局范文内调用 locals() 函数，其功能和 globals() 函数相同。
+
+# 全局变量
+Pyname = "Python教程"
+Pyadd = "http://c.biancheng.net/python/"
+
+
+def text():
+    # 局部变量
+    Shename = "shell教程"
+    Sheadd = "http://c.biancheng.net/shell/"
+    print("函数内部的 locals:")
+    print(locals())
+
+
+text()
+print("函数外部的 locals:")
+print(locals())
+print(None == text)
+
+# B
+# 当使用 locals() 函数获得所有局部变量组成的字典时，可以向 globals() 函数那样，通过指定键访问对应的变量值，但无法对变量值做修改
+
+
+# 全局变量
+Pyname = "Python教程"
+Pyadd = "http://c.biancheng.net/python/"
+
+
+def text():
+    # 局部变量
+    Shename = "shell教程"
+    Sheadd = "http://c.biancheng.net/shell/"
+    print(locals()['Shename'])
+    locals()['Shename'] = "shell入门教程"
+    print(Shename)
+
+
+text()
+
+#  C
+#  vars() 函数也是 Python 内置函数，其功能是返回一个指定 object 对象范围内所有变量组成的字典。
+#  如果不传入object 参数，vars() 和 locals() 的作用完全相同。
+# 全局变量
+Pyname = "Python教程"
+Pyadd = "http://c.biancheng.net/python/"
+
+
+class Demo:
+    name = "Python 教程"
+    add = "http://c.biancheng.net/python/"
+
+
+print("有 object：")
+print(vars(Demo))
+print("无 object：")
+print(vars())
