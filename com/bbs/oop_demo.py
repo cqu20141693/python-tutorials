@@ -75,6 +75,9 @@ class People:
         self.age = a
         self.__weight = w
 
+    def info(self):
+        print("name:", self.name, "age:", self.age, "weight:", self.__weight)
+
     def speak(self):
         print("%s 说: 我 %d 岁。" % (self.name, self.age))
 
@@ -100,6 +103,7 @@ people.speak()
 
 s = Student('张三', 10, 60, 3)
 s.speak()
+s.info()
 # 用子类对象调用父类已被覆盖的方法
 super(Student, s).speak()
 '''
