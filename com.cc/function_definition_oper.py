@@ -333,3 +333,59 @@ print("有 object：")
 print(vars(Demo))
 print("无 object：")
 print(vars())
+
+
+#                 python 中的局部函数及用法
+
+# 首先局部函数和局部变量一样，默认情况下 局部函数只能在奇所在函数的作用域内使用
+
+# 全局函数
+def outdef():
+    def indef():  # 局部函数
+        print('局部函数')
+        # 调用局部函数
+
+    return indef  # 返回局部函数名  indef() 叫做函数的调用
+
+
+# 调用全局函数
+new_indef = outdef()
+# 调用全局函数中的局部函数
+new_indef()
+
+
+#                    什么是闭包， Python闭包
+# 闭包，又称闭包函数或者闭合函数，其实和前面讲的嵌套函数类似，不同之处在于，闭包中外部函数返回的不是一个具体的值，而是一个函数。
+# 例子  计算一个数的n次幂
+
+def nth_power(x):
+    def nth_power1(y):
+        return y ** x
+
+    return nth_power1
+
+
+new_power = nth_power(2)  # 计算一个数的平方
+new_power1 = nth_power(3)  # 计算一个数的立方
+print(new_power(4))
+print(new_power1(4))
+
+#  python闭包的_closure_属性
+# 闭包比普通的函数多了一个 __closure__ 属性，该属性记录着自由变量的地址。
+# 当闭包被调用时，系统就会根据该地址找到对应的自由变量，完成整体的函数调用。
+print(new_power.__closure__)
+
+
+#                   python lambda表达式（匿名函数）及用法
+
+# lambda表达式的语法格式：name = lambda[list]:表达式  []为可选参数
+
+# 例子
+def add1(x, y):
+    return x + y
+
+
+print(add1(3, 5))
+
+add2 = lambda x, y: x + y
+print(add2(2, 9))
