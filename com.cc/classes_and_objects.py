@@ -218,7 +218,294 @@ print(clang1.name)
 print(clang1.add)
 print(clang2.name)
 print(clang2.add)
+
+
 # 注意，通过类对象是无法修改类变量的。通过类对象对类变量赋值，其本质将不再是修改类变量的值，
 # 而是在给该对象定义新的实例变量（在讲实例变量时会进行详细介绍）
 
 
+#  实例变量 （实例属性）
+# 实例变量指的是在任意类方法内部，以“self.变量名”的方式定义的变量，
+# 其特点是只作用于调用方法的对象。另外，实例变量只能通过对象名访问，无法通过类名访问。
+
+class other:
+    high = 172
+
+    def __init__(self):
+        self.name = '邬鑫'
+        self.add = '是一个没有自控能力的人'
+        # 下面定义一个实例方法
+
+    def say(self):
+        self.age = 20
+
+
+# 由于 __init__() 函数在创建类对象时会自动调用，而 say() 方法需要类对象手动调用。
+# 因此，CLanguage 类的类对象都会包含 name 和 add 实例变量，而只有调用了 say() 方法的类对象，才包含 catalog 实例变量。
+other1 = other()
+print(other1.name)
+print(other1.add)
+# 由于 other 对象未调用 say() 方法，因此其没有 other 变量，下面这行代码会报错
+# print(other1.age)
+
+# #只有调用 say()，才会拥有 catalog 实例变量
+other1.say()
+print(other1.age)
+
+# 前面讲过，通过类对象可以访问类变量，但无法修改类变量的值。这是因为，通过类对象修改类变量的值，不是在给“类变量赋值”，而是定义新的实例变量。
+
+other1.high = 180
+print(other1.high)  # 定义新的实例变量
+print(other.high)  # 类变量并没有改变
+
+other.high = 180
+print(other1.high)
+print(other.high)  # 改变了类变量的值
+
+
+# 类中，实例变量和类变量可以同名，但这种情况下使用类对象将无法调用类变量，它会首选实例变量，这也是不推荐“类变量使用对象名调用”的原因。
+
+# 另外，和类变量不同，通过某个对象修改实例变量的值，不会影响类的其它实例化对象，更不会影响同名的类变量
+
+class CLanguage:
+    name = "xxx"  # 类变量
+    add = "http://"  # 类变量
+
+    def __init__(self):
+        self.name = "C语言中文网"  # 实例变量
+        self.add = "http://c.biancheng.net"  # 实例变量
+
+    # 下面定义了一个say实例方法
+    def say(self):
+        self.catalog = 13  # 实例变量
+
+
+clang = CLanguage()
+# 修改 clang 对象的实例变量
+clang.name = "python教程"
+clang.add = "http://c.biancheng.net/python"
+print(clang.name)
+print(clang.add)
+clang2 = CLanguage()
+print(clang2.name)
+print(clang2.add)
+# 输出类变量的值
+print(CLanguage.name)
+print(CLanguage.add)
+
+
+#                                  局部变量
+# 除了实例变量，类方法中还可以定义局部变量。和前者不同，局部变量直接以“变量名=值”的方式进行定义，例如：
+class CLanguage:
+    # 下面定义了一个say实例方法
+    def count(self, money):
+        sale = 0.8 * money
+        print("优惠后的价格为：", sale)
+
+
+clang = CLanguage()
+clang.count(100)
+# 通常情况下，定义局部变量是为了所在类方法功能的实现。需要注意的一点是，局部变量只能用于所在函数中，函数执行完成后，局部变量也会被销毁。
+
+
+#                           python 中实例方法，静态方法和类方法详解 （区别和用法）
+"""
+和类属性的分类不同，对于初学者来说，区分这 3 种类方法是非常简单的，即采用 @classmethod 修饰的方法为类方法；
+采用 @staticmethod 修饰的方法为静态方法；不用任何修改的方法为实例方法。
+其中 @classmethod 和 @staticmethod 都是函数装饰器。
+"""
+
+
+#     python中的实例方法
+class Classmate:
+    # 类构造方法 也属于实例方法
+    def __init__(self):
+        self.name = '吴江'
+        self.hihg = 170
+
+        # 定义一个say的 实例方法
+
+    def say(self):
+        print('正在调用say()实例方法')
+
+
+# 实例方法最大的特点就是，它最少也要包含一个 self 参数，用于绑定调用此方法的实例对象（Python 会自动完成绑定）。实例方法通常会用类对象直接调用
+classmate = Classmate()
+classmate.say()
+
+# 当然，Python 也支持使用类名调用实例方法，但此方式需要手动给 self 参数传值
+Classmate.say(classmate)
+
+
+#                                  python类方法
+
+# Python 类方法和实例方法相似，它最少也要包含一个参数，只不过类方法中通常将其命名为 cls，
+# Python 会自动将类本身绑定给 cls 参数（注意，绑定的不是类对象）。也就是说，我们在调用类方法时，无需显式为 cls 参数传参。
+
+# 和 self 一样，cls 参数的命名也不是规定的（可以随意命名），只是 Python 程序员约定俗称的习惯而已。
+
+class ui:
+    # 类构造方法，也属于实例方法
+    def __init__(self):
+        self.name = 'UI'
+        self.add = 'NB'
+
+        # 定义一个类方法
+
+    @classmethod
+    def info(cls):
+        print('正在调用类方法', cls)
+
+
+# 注意，如果没有 ＠classmethod，则 Python 解释器会将 fly() 方法认定为实例方法，而不是类方法。
+
+# 类方法推荐使用类名直接调用，当然也可以使用实例对象来调用（不推荐）。例如，在上面 CLanguage 类的基础上
+
+# 使用类名直接调用类方法
+ui.info()
+# s使用类对象来调用类方法
+ui1 = ui()
+ui1.info()
+
+#                       python类 静态方法
+"""
+静态方法，其实就是我们学过的函数，和函数唯一的区别是，静态方法定义在类这个空间（类命名空间）中，
+而函数则定义在程序所在的空间（全局命名空间）中。
+
+静态方法没有类似 self、cls 这样的特殊参数，因此 Python 解释器不会对它包含的参数做任何类或对象的绑定。
+也正因为如此，类的静态方法中无法调用任何类属性和类方法。
+"""
+
+
+# 静态方法需要使用＠staticmethod修饰
+class pig1:
+    @staticmethod
+    def info(name, add):
+        print(name, add)
+
+
+# 静态方法的调用，既可以使用类名，也可以使用类对象
+pig11 = pig1()
+pig11.info('wuxin', 'shigehazi')
+pig1.info('zhuer', 'shigezhuerchong')
+
+#  在实际编程中，几乎不会用到类方法和静态方法，因为我们完全可以使用函数代替它们实现想要的功能，
+#  但在一些特殊的场景中（例如工厂模式中），使用类方法和静态方法也是很不错的选择。
+
+#  python类调用实例方法
+"""
+通过前面的学习，类方法大体分为 3 类，分别是类方法、实例方法和静态方法，其中实例方法用的是最多的。
+我们知道，实例方法的调用方式其实有 2 种，既可以采用类对象调用，也可以直接通过类名调用。
+
+通常情况下，我们习惯使用类对象调用类中的实例方法。但如果想用类调用实例方法，不能像如下这样：
+"""
+
+
+class CLanguage:
+    def info(self):
+        print("我正在学 Python")
+
+
+# 通过类名直接调用实例方法
+"""
+CLanguage.info()
+运行上面代码，程序会报出如下错误：
+Traceback (most recent call last):
+  File "D:\python3.6\demo.py", line 5, in <module>
+    CLanguage.info()
+TypeError: info() missing 1 required positional argument: 'self'
+
+其中，最后一行报错信息提示我们，调用 info() 类方式时缺少给 self 参数传参。这意味着，和使用类对象调用实例方法不同，通过类名直接调用实例方法时，Python 并不会自动给 self 参数传值。
+读者想想也应该明白，self 参数需要的是方法的实际调用者（是类对象），而这里只提供了类名，当然无法自动传值。
+"""
+
+
+# 因此，如果想通过类名直接调用实例方法，就必须手动为 self 参数传值。例如修改上面的代码为：
+class CLanguage:
+    def info(self):
+        print("我正在学 Python")
+
+
+clang = CLanguage()
+# 通过类名直接调用实例方法
+CLanguage.info(clang)
+
+
+# 可以看到，通过手动将 clang 这个类对象传给了 self 参数，使得程序得以正确执行。实际上，这里调用实例方法的形式完全是等价于 clang.info()。
+
+# 值得一提的是，上面的报错信息只是让我们手动为 self 参数传值，但并没有规定必须传一个该类的对象，其实完全可以任意传入一个参数，例如：
+class CLanguage:
+    def info(self):
+        print(self, "正在学 Python")
+
+
+# 通过类名直接调用实例方法
+CLanguage.info("zhangsan")
+
+# 可以看到，"zhangsan" 这个字符串传给了 info() 方法的 self 参数。显然，
+# 无论是 info() 方法中使用 self 参数调用其它类方法，还是使用 self 参数定义新的实例变量，胡乱的给 self 参数传参都将会导致程序运行崩溃。
+
+# 总的来说，Python 中允许使用类名直接调用实例方法，但必须手动为该方法的第一个 self 参数传递参数，这种调用方法的方式被称为“非绑定方法”。
+# 用类的实例对象访问类成员的方式称为绑定方法，而用类名调用类成员的方式称为非绑定方法。
+
+
+#                            浅谈 Python 类命名空间
+#  类命名空间   Python 编写的整个程序默认处于全局命名空间内，而类体 则 处于类名空间内
+
+
+
+#                           python 中 描述符详解
+
+"""
+描述符是 Python 中复杂属性访问的基础，它在内部被用于实现 property、方法、类方法、静态方法和 super 类型。
+
+描述符类基于以下 3 个特殊方法，换句话说，这 3 个方法组成了描述符协议：
+__set__(self, obj, type=None)：在设置属性时将调用这一方法（本节后续用 setter 表示）；
+__get__(self, obj, value)：在读取属性时将调用这一方法（本节后续用 getter 表示）；
+__delete__(self, obj)：对属性调用 del 时将调用这一方法。
+其中，实现了 setter 和 getter 方法的描述符类被称为数据描述符；反之，如果只实现了 getter 方法，则称为非数据描述符。
+"""
+"""
+实际上，在每次查找属性时，描述符协议中的方法都由类对象的特殊方法 __getattribute__() 
+调用（注意不要和 __getattr__() 弄混）。也就是说，每次使用类对象.属性（或者 getattr(类对象，属性值)）的调用方式时，
+都会隐式地调用 __getattribute__()，它会按照下列顺序查找该属性：
+
+验证该属性是否为类实例对象的数据描述符；
+如果不是，就查看该属性是否能在类实例对象的 __dict__ 中找到；
+最后，查看该属性是否为类实例对象的非数据描述符。
+
+"""
+
+
+#             描述符类
+class revealAccess:
+    def __init__(self, initval=None, name='var'):
+        self.val = initval
+        self.name = name
+
+    def __get__(self, obj, objtype):
+        print("Retrieving", self.name)
+        return self.val
+
+    def __set__(self, obj, val):
+        print("updating", self.name)
+        self.val = val
+
+
+class myClass:
+    x = revealAccess(10, 'var "x"')
+    y = 5
+
+
+m = myClass()
+print(m.x)
+m.x = 20
+print(m.x)
+print(m.y)
+"""
+从这个例子可以看到，如果一个类的某个属性有数据描述符，那么每次查找这个属性时，都会调用描述符的 __get__() 方法，并返回它的值；同样，每次在对该属性赋值时，也会调用 __set__() 方法。
+
+注意，虽然上面例子中没有使用 __del__() 方法，但也很容易理解，当每次使用 del 类对象.属性（或者 delattr(类对象，属性)）语句时，都会调用该方法。
+
+除了使用描述符类自定义类属性被调用时做的操作外，还可以使用 property() 函数或者 @property 装饰器
+"""

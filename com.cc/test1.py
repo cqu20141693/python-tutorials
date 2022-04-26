@@ -1,8 +1,22 @@
-for i in range(1, 10):
-    for j in range(1, i + 1):
-         mul = i * j
-         if mul < 10:
-             print(str(j) + "x" + str(i) + "=" + str(mul), end="   ")
-         else:
-             print(str(j) + "x" + str(i) + "=" + str(mul), end="  ")
-    print()
+class revealAccess:
+    def __init__(self, initval=None, name='var'):
+        self.val = initval
+        self.name = name
+
+    def __get__(self, obj, objtype):
+        print("Retrieving", self.name)
+        return self.val
+
+    def __set__(self, obj, val):
+        print("updating", self.name)
+        self.val = val
+
+
+class myClass:
+    x = revealAccess(10, 'var "x"')
+    y = 5
+
+
+m = myClass()
+print(m.x)
+m.x = 20
