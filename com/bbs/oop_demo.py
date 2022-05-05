@@ -211,3 +211,34 @@ class Vector:
 
     def __add__(self, other):
         return Vector(self.a + other.a, self.b + other.b)
+
+
+class MyClass:
+    alphabet = "abcdefghigklmnopqrstuvwxyz"
+
+    def __init__(self, name: str):
+        self.name = name
+        self.__name = name
+
+    def get(self, index: int) -> str:
+        """ 通过index获取字母表字母
+
+        :param index: 字母索引
+        :return:
+            str: 字符字母
+        """
+        print(self.name, self.__name)
+        return MyClass.alphabet[index % 26]
+
+    def getName(self):
+        return self.__name
+
+
+x = MyClass("cc")
+print(MyClass.alphabet)
+try:
+    print(MyClass.get(0))
+except TypeError as err:
+    print(err)
+print(x.get(0))
+print("name:", x.name, "__name:", x.getName())
