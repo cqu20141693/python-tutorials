@@ -144,9 +144,11 @@ print(lisi.name)
 #  为pig对象增加一个money是实例变量
 pig.money = 480
 print(pig.money)
+print(vars(pig))
 
 # 删除增加的money实例变量
 del pig.money
+print(vars(pig))
 
 
 # 再次尝试输出money，此时会报错  print(pig.money)
@@ -163,12 +165,15 @@ pig.foo = info
 # Python不会自动将调用者绑定到第一个参数，
 # 因此程序需要手动将调用者绑定为第一个参数
 pig.foo(pig)  # ①
+pig.foo('pig')  # ①
 # 使用lambda表达式为clanguage对象的bar方法赋值（动态绑定方法）
-pig.bar = lambda self: print('--lambda表达式--', self)
-pig.bar(pig)  # ②
+pig.single = lambda self: print('--lambda表达式--', self)
+pig.two = lambda first, second: first + second
+pig.single(pig)  # ②
+print(pig.two(1, 2))
 
 
-#  使用函数、lambda 表达式为 clanguage 对象动态增加了方法，但对于动态增加的方法，
+#  使用函数、lambda 表达式)为 clanguage 对象动态增加了方法，但对于动态增加的方法，
 #  Python 不会自动将方法调用者绑定到它们的第一个参数，因此程序必须手动为第一个参数传入参数值，如上面程序中 ① 号、② 号代码所示。
 
 # 有没有不用手动给 self 传值的方法呢？通过借助 types 模块下的 MethodType 可以实现，仍以上面的 info() 函数为例：
@@ -453,7 +458,6 @@ CLanguage.info("zhangsan")
 #  类命名空间   Python 编写的整个程序默认处于全局命名空间内，而类体 则 处于类名空间内
 
 
-
 #                           python 中 描述符详解
 
 """
@@ -509,3 +513,6 @@ print(m.y)
 
 除了使用描述符类自定义类属性被调用时做的操作外，还可以使用 property() 函数或者 @property 装饰器
 """
+
+
+

@@ -55,3 +55,11 @@ closefd ：如果 closed 为 False 并且给出了文件描述符而不是文件
 底层文件描述符将保持打开状态；如果给出文件名，closed 为 True （默认值），否则将引发错误。
 opener : 可以通过传递可调用的 opener 来使用自定义开启器。
 """
+"""
+文件新建打开： open('路径'，'扩展名')
+读：read（） readline（） 返回的都是一个字符串 readlines（）返回一个由字符串组成的列表
+写： write（） 写一个字符串 writelines（list） 
+关闭文件 clos（）
+"""
+#  文件的删除 os.remove（文件路径）
+
