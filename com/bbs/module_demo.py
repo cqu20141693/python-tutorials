@@ -21,7 +21,7 @@ from modname import *
 import sys
 
 # 自定义模块引用
-from com.bbs.common import twoSum
+from com.bbs.common import Solution
 from com.bbs.system import testOS
 
 ' a test module '
@@ -56,5 +56,6 @@ Python解释器把一个特殊变量__name__置为__main__，而如果在其他�
 '''
 if __name__ == '__main__':
     testCommon()
-    print("twoSum:", twoSum([2, 5, 6, 7, 11], 9))
+    s = Solution()
+    print("twoSum:", s.twoSum([2, 5, 6, 7, 11], 9))
     testOSFunc()
