@@ -226,3 +226,10 @@ dmypy.json
 cython_debug/
 .idea/
 
+*.pyc
+app.db
+./tmp
+./build/*
+env
+venv
+*.sublime*
